@@ -1,4 +1,10 @@
 Attribute VB_Name = "Module2"
+
+'===================================================
+' (!) TimeSeries to be developed
+'===================================================
+
+
 Public Function timeSeries(projNo)
 
 Dim rng As Range, cell As Range
@@ -18,9 +24,9 @@ Sheets(projNo & "HQ").Range("J6:M" & lrow).Copy
 Sheets(projNo & "Time").Cells(6, 1).PasteSpecial xlPasteValues
 
  'C_MRP TYPE
- lrowPartList = Sheets("MajorParts").Cells(Rows.Count, 3).End(xlUp).Row
+ lrowPartlist = Sheets("MajorParts").Cells(Rows.Count, 3).End(xlUp).Row
  ActiveSheet.Range(Cells(2, 5), Cells(lrow, 5)).FormulaR1C1 = _
- "=VLOOKUP(RC1,'MajorParts'!R1C1:R" & lrowPartList & "C3,3,FALSE)"
+ "=VLOOKUP(RC1,'MajorParts'!R1C1:R" & lrowPartlist & "C3,3,FALSE)"
               
 
 lcol = Cells(6, Columns.Count).End(xlToLeft).Column
