@@ -125,14 +125,14 @@ Public Function readLOT(link)
     Set wksWebWorkSheet = ActiveSheet
     
     'projName SO
-    wkbWebWorkbook.Sheets("Overview purchase order").Copy after:=wkbMyWorkbook.Sheets("MAIN")
+    wkbWebWorkbook.Sheets("Overview purchase order").Copy After:=wkbMyWorkbook.Sheets("MAIN")
     ActiveSheet.UsedRange.Copy
     addSheet (projName & "SO")
     Cells(1, 1).PasteSpecial xlPasteValues
     deleteSheet ("Overview purchase order")
            
     'projName HQ
-    wkbWebWorkbook.Sheets("BOM set (inner comp. transfer)").Copy after:=wkbMyWorkbook.Sheets("MAIN")
+    wkbWebWorkbook.Sheets("BOM set (inner comp. transfer)").Copy After:=wkbMyWorkbook.Sheets("MAIN")
     ActiveSheet.UsedRange.Copy
     addSheet (projName & "HQ")
     Cells(1, 1).PasteSpecial xlPasteValues
@@ -150,4 +150,33 @@ Function initializeProjectProgress(SheetName)
     End If
 
 End Function
+
+
+
+Function LastRow(sh As Worksheet)
+    On Error Resume Next
+    LastRow = sh.Cells.Find(What:="*", _
+                            After:=sh.Range("A1"), _
+                            Lookat:=xlPart, _
+                            LookIn:=xlFormulas, _
+                            SearchOrder:=xlByRows, _
+                            SearchDirection:=xlPrevious, _
+                            MatchCase:=False).Row
+    On Error GoTo 0
+End Function
+
+Function LastCol(sh As Worksheet)
+    On Error Resume Next
+    LastCol = sh.Cells.Find(What:="*", _
+                            After:=sh.Range("A1"), _
+                            Lookat:=xlPart, _
+                            LookIn:=xlFormulas, _
+                            SearchOrder:=xlByColumns, _
+                            SearchDirection:=xlPrevious, _
+                            MatchCase:=False).Column
+    On Error GoTo 0
+End Function
+
+
+
 

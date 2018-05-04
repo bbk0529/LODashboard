@@ -63,6 +63,7 @@ ActiveSheet.Range(Cells(2, 1), Cells(lrow, lcol)).Select
         .HasTitle = True
         .ChartTitle.Text = projName & "Planned and Order (" & Now & ")"
         .ApplyLayout (2)
+        .ChartColor = 11
         
         
     End With
@@ -95,5 +96,6 @@ ActiveSheet.Range(Cells(plow, 10), Cells(lrow, lcol)).Select
         .HasTitle = True
         .ChartTitle.Text = projName & "Delivered and Order (" & Now & ")"
         .ApplyLayout (2)
+        .ChartColor = 11
     End With
 End Function

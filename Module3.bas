@@ -3,7 +3,7 @@ Attribute VB_Name = "Module3"
 ' PROJECT QTY sheets made
 '=======================================
 Public Function a()
-    removeDuplicates (298)
+    removeDuplicates (459)
 End Function
 
 Public Function removeDuplicates(projNo)
@@ -17,7 +17,12 @@ Public Function removeDuplicates(projNo)
     
     Debug.Print "lrow : ", lrow, "lrow2 : ", lrow2, "lrowpartlist : ", lrowPartlist
     
+    
     Sheets(projNo & "QTY").Activate
+
+    lrow = Sheets(projNo & "HQ").Cells(Rows.Count, 10).End(xlUp).Row
+
+
     With ActiveSheet
        
         'A_PART# from HQ
@@ -30,6 +35,12 @@ Public Function removeDuplicates(projNo)
             "='" & projNo & "SO'!R[" & -lrow - 1 + 5 & "]C7"
             Debug.Print "============!!!", (-lrow + 5)
         End If
+        
+        
+        'J_PART# from HQ
+        .Range(.Cells(2, 9), .Cells(lrow, 9)).FormulaR1C1 = _
+        "='" & projNo & "HQ'!RC8"
+        
         qtyrow = Sheets(projNo & "QTY").Cells(Rows.Count, 1).End(xlUp).Row
                
        
@@ -72,7 +83,7 @@ Public Function removeDuplicates(projNo)
 'Remove duplicate
 '========================
     LastRow = ActiveSheet.Range("A" & Rows.Count).End(xlUp).Row
-    Set MyRange = ActiveSheet.Range("A1:H" & LastRow)
+    Set MyRange = ActiveSheet.Range("A1:I" & LastRow)
     MyRange.removeDuplicates Columns:=1, Header:=xlYes
 
 
@@ -88,6 +99,13 @@ Public Function removeDuplicates(projNo)
         Cells(1, 7) = "DELIVERED"
         Cells(1, 8) = "OPEN QTY"
 
-     ActiveSheet.Columns.AutoFit
+    ActiveSheet.Columns.AutoFit
+    Set CopyRng = ActiveSheet.UsedRange
+    CopyRng.Copy
+    With ActiveSheet.Cells(Last + 1, "A")
+    .PasteSpecial xlPasteValues
+    .PasteSpecial xlPasteFormats
+    Application.CutCopyMode = False
+End With
 End Function
 
